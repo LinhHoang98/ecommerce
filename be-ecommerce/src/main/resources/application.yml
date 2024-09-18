@@ -1,1 +1,8 @@
-spring.application.name=be-ecommerce
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ecommerce
+    username: user
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
