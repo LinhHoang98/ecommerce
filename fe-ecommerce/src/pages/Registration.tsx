@@ -1,7 +1,23 @@
 import {useForm} from "@tanstack/react-form";
 import {Button, FormControl, FormLabel, Input} from "@chakra-ui/react";
+import axios from "axios";
+import {useMutation} from "@tanstack/react-query";
 
 export const Registration = () => {
+
+    const register = async (data: any) => {
+        await axios.post("http://localhost:8080/api/v1/accounts", data);
+    }
+
+    const useRegister = () => {
+        return useMutation({
+            mutationFn: (data: any) => register(data),
+            onMutate: () => console.log('success')
+        });
+    }
+
+    const createAccountMutation = useRegister();
+
     const form = useForm({
         defaultValues: {
             username: '',
@@ -9,7 +25,7 @@ export const Registration = () => {
             confirmPassword: '',
         },
         onSubmit: async ({value}) => {
-            console.log(value);
+            createAccountMutation.mutate(value);
         }
     });
 
