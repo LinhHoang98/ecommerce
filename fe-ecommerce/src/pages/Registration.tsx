@@ -1,20 +1,8 @@
 import {useForm} from "@tanstack/react-form";
 import {Button, FormControl, FormLabel, Input} from "@chakra-ui/react";
-import axios from "axios";
-import {useMutation} from "@tanstack/react-query";
+import {useRegister} from "../api/mutations/account.ts";
 
 export const Registration = () => {
-
-    const register = async (data: any) => {
-        await axios.post("http://localhost:8080/api/v1/accounts", data);
-    }
-
-    const useRegister = () => {
-        return useMutation({
-            mutationFn: (data: any) => register(data),
-            onMutate: () => console.log('success')
-        });
-    }
 
     const createAccountMutation = useRegister();
 
